@@ -1,5 +1,5 @@
 import "./App.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Description from "../Description/Description";
 import Options from "../Options/Options";
 import Feedback from "../Feedback/Feedback";
@@ -20,13 +20,9 @@ function App() {
 	const updateFeedback = (feedbackType) => {
 		setFeedback({
 			...feedback,
-			feedbackType: feedback.feedbackType + 1,
+			[feedbackType]: feedback[feedbackType] + 1,
 		});
 	};
-
-	useEffect(() => {
-		console.log(feedback);
-	}, [feedback]);
 
 	return (
 		<>
