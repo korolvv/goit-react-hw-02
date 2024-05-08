@@ -11,7 +11,7 @@ function App() {
 		const savedFeedback = localStorage.getItem("feedback-data");
 		if (savedFeedback !== null) {
 			let data = JSON.parse(savedFeedback);
-			if (data.good !== 0) {
+			if (data.good !== 0 || data.neutral !== 0 || data.bad !== 0) {
 				setIsClick(!isClick);
 				return data;
 			}
