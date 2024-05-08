@@ -6,18 +6,15 @@ import Feedback from "../Feedback/Feedback";
 import Notification from "../Notification/Notification";
 
 function App() {
-	const [isClick, setIsClick] = useState(false);
 	const [feedback, setFeedback] = useState(() => {
 		const savedFeedback = localStorage.getItem("feedback-data");
 		if (savedFeedback !== null) {
 			let data = JSON.parse(savedFeedback);
 			if (data.good !== 0 || data.neutral !== 0 || data.bad !== 0) {
-				setIsClick(!isClick);
 				return data;
 			}
 			return data;
 		} else {
-			isClick === true ? setIsClick(!isClick) : isClick;
 			return {
 				good: 0,
 				neutral: 0,
@@ -35,7 +32,6 @@ function App() {
 			...feedback,
 			[feedbackType]: feedback[feedbackType] + 1,
 		});
-		isClick === false ? setIsClick(!isClick) : isClick;
 	};
 
 	const resetFeedback = () => {
@@ -44,12 +40,12 @@ function App() {
 			neutral: 0,
 			bad: 0,
 		});
-		setIsClick(!isClick);
 	};
 
 	const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
 
-	const positiveFeedback = Math.round((feedback.good / totalFeedback) * 100);
+	const positiveFeedback =
+		totalFeedback > 0 && Math.round((feedback.good / totalFeedback) * 100);
 
 	return (
 		<>
@@ -59,7 +55,7 @@ function App() {
 				total={totalFeedback}
 				onReset={resetFeedback}
 			/>
-			{isClick ? (
+			{totalFeedback ? (
 				<Feedback
 					values={feedback}
 					total={totalFeedback}
