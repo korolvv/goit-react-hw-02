@@ -56,7 +56,7 @@ function App() {
 			<Description />
 			<Options
 				onUpdate={updateFeedback}
-				isClick={isClick}
+				total={totalFeedback}
 				onReset={resetFeedback}
 			/>
 			{isClick ? (
