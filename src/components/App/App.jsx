@@ -45,9 +45,10 @@ function App() {
 	const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
 
 	const positiveFeedback =
-		totalFeedback > 0 &&
-		feedback.good &&
-		Math.round((feedback.good / totalFeedback) * 100);
+		(totalFeedback > 0 &&
+			feedback.good &&
+			Math.round((feedback.good / totalFeedback) * 100)) ||
+		0;
 
 	return (
 		<>
